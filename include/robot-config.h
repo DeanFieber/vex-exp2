@@ -19,8 +19,11 @@ extern motor pushMotor;
  */
 void  vexcodeInit( void );
 
-#define RIGHT 1
-#define LEFT -1
-void move(int32_t side, motor frontWheel, motor backWheel, vex::controller::axis stick);
+#define RIGHT -1
+#define LEFT 1
+
+void leftTrack(vex::controller::axis stick);
+void rightTrack(vex::controller::axis stick);
+
 void intake (vex::controller::button load, vex::controller::button unload);
 void tower (vex::controller::button forward, vex::controller::button back);

@@ -27,34 +27,47 @@ motor pushMotor = motor(PORT7, ratio36_1, false);
  */
 void vexcodeInit(void) {}
 
-void move(int32_t side, motor frontWheel, motor backWheel, vex::controller::axis stick) {
-  // int32_t direction = stick.value();
+void leftTrack(vex::controller::axis stick) {
   int32_t velocity = stick.position();
-  if (side * velocity > 0) {
-    frontWheel.spin(forward, abs(velocity), velocityUnits::pct);
-    backWheel.spin(forward, abs(velocity), velocityUnits::pct);
-  } else if (side * velocity < 0) {
-    frontWheel.spin(reverse, abs(velocity), velocityUnits::pct);
-    backWheel.spin(reverse, abs(velocity), velocityUnits::pct);
+  if (velocity != 0) {
+    frontLeftMotor.spin(forward, velocity, velocityUnits::pct);
+    backLeftMotor.spin(forward, velocity, velocityUnits::pct);
   } else {
-    frontWheel.stop();
-    backWheel.stop();
+    frontLeftMotor.stop();
+    backLeftMotor.stop();
   }
 }
 
-void intake (vex::controller::button load, vex::controller::button unload) {
-    if (load.pressing()) {
-      leftIntake.spin(reverse, 100, velocityUnits::pct);
-      rightIntake.spin(forward, 100, velocityUnits::pct);
-    } else if (unload.pressing()) {
-      leftIntake.spin(forward, 100, velocityUnits::pct);
-      rightIntake.spin(reverse, 100, velocityUnits::pct);
-    } else {
-      leftIntake.stop();
-      rightIntake.stop();
-    }
+void rightTrack(vex::controller::axis stick) {
+  int32_t velocity = -1 * stick.position();
+  if (velocity != 0) {
+    frontRightMotor.spin(forward, velocity, velocityUnits::pct);
+    backRightMotor.spin(forward, velocity, velocityUnits::pct);
+  } else {
+    frontRightMotor.stop();
+    backRightMotor.stop();
+  }
 }
 
-void tower (vex::controller::button forward, vex::controller::button back){
-  
+void intake(vex::controller::button load, vex::controller::button unload) {
+  if (load.pressing()) {
+    leftIntake.spin(reverse, 100, velocityUnits::pct);
+    rightIntake.spin(forward, 100, velocityUnits::pct);
+  } else if (unload.pressing()) {
+    leftIntake.spin(forward, 100, velocityUnits::pct);
+    rightIntake.spin(reverse, 100, velocityUnits::pct);
+  } else {
+    leftIntake.stop();
+    rightIntake.stop();
+  }
+}
+
+void tower(vex::controller::button forwardButton, vex::controller::button backButton) {
+  if (forwardButton.pressing()) {
+    pushMotor.spin(reverse, 100, velocityUnits::pct);
+  } else if (backButton.pressing()) {
+    pushMotor.spin(forward, 100, velocityUnits::pct);
+  } else {
+    pushMotor.stop();
+  }
 }

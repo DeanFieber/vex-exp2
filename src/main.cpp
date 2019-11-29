@@ -77,33 +77,10 @@ void autonomous(void) {
 void usercontrol(void) {
   while (true) {
 
-    move(LEFT, frontLeftMotor, backLeftMotor, Controller1.Axis3);
-    move(RIGHT, frontRightMotor, backRightMotor, Controller1.Axis2);
-
+    leftTrack(Controller1.Axis3);
+    rightTrack(Controller1.Axis2);
     intake(Controller1.ButtonL1, Controller1.ButtonL2);
-    // bool leftShoulder = Controller1.ButtonL1.pressing(); // rename intakeLoad?
-    // bool leftTrigger = Controller1.ButtonL2.pressing(); // rename intakeUnload?
-    // if (leftTrigger) {
-    //   leftIntake.spin(reverse, 100, velocityUnits::pct);
-    //   rightIntake.spin(forward, 100, velocityUnits::pct);
-    // } else if (leftShoulder) {
-    //   leftIntake.spin(forward, 100, velocityUnits::pct);
-    //   rightIntake.spin(reverse, 100, velocityUnits::pct);
-    // } else {
-    //   leftIntake.stop();
-    //   rightIntake.stop();
-    // }
-
-    tower (Controller1.ButtonR1, Controller1.ButtonR2);
-    // bool rightShoulder = Controller1.ButtonR1.pressing(); // rename tiltForward?
-    // bool rightTrigger = Controller1.ButtonR2.pressing();  // tileBackward?
-    // if (rightTrigger) {
-    //   pushMotor.spin(reverse, 100, velocityUnits::pct);
-    // } else if (rightShoulder) {
-    //   pushMotor.spin(forward, 100, velocityUnits::pct);
-    // } else {
-    //   pushMotor.stop();
-    // }
+    tower(Controller1.ButtonR1, Controller1.ButtonR2);
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
