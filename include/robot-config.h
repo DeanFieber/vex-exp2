@@ -18,3 +18,9 @@ extern motor pushMotor;
  * This should be called at the start of your int main function.
  */
 void  vexcodeInit( void );
+
+#define RIGHT 1
+#define LEFT -1
+void move(int32_t side, motor frontWheel, motor backWheel, vex::controller::axis stick);
+void intake (vex::controller::button load, vex::controller::button unload);
+void tower (vex::controller::button forward, vex::controller::button back);

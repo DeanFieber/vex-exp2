@@ -77,54 +77,33 @@ void autonomous(void) {
 void usercontrol(void) {
   while (true) {
 
-    int32_t leftStick = Controller1.Axis3.value();
-    int32_t leftVelocity = abs(Controller1.Axis3.position());
-    if (leftStick > 0) {
-      frontLeftMotor.spin(forward, leftVelocity, velocityUnits::pct);
-      backLeftMotor.spin(forward, leftVelocity, velocityUnits::pct);
-    } else if (leftStick < 0) {
-      frontLeftMotor.spin(reverse, leftVelocity, velocityUnits::pct);
-      backLeftMotor.spin(reverse, leftVelocity, velocityUnits::pct);
-    } else {
-      frontLeftMotor.stop();
-      backLeftMotor.stop();
-    }
+    move(LEFT, frontLeftMotor, backLeftMotor, Controller1.Axis3);
+    move(RIGHT, frontRightMotor, backRightMotor, Controller1.Axis2);
 
-    int32_t rightStick = Controller1.Axis2.value();
-    int32_t rightVelocity = abs(Controller1.Axis2.position());
-    if (rightStick > 0) {
-      frontRightMotor.spin(reverse, rightVelocity, velocityUnits::pct);
-      backRightMotor.spin(reverse, rightVelocity, velocityUnits::pct);
-    } else if (rightStick < 0) {
-      frontRightMotor.spin(forward, rightVelocity, velocityUnits::pct);
-      backRightMotor.spin(forward, rightVelocity, velocityUnits::pct);
-    } else {
-      frontRightMotor.stop();
-      backRightMotor.stop();
-    }
+    intake(Controller1.ButtonL1, Controller1.ButtonL2);
+    // bool leftShoulder = Controller1.ButtonL1.pressing(); // rename intakeLoad?
+    // bool leftTrigger = Controller1.ButtonL2.pressing(); // rename intakeUnload?
+    // if (leftTrigger) {
+    //   leftIntake.spin(reverse, 100, velocityUnits::pct);
+    //   rightIntake.spin(forward, 100, velocityUnits::pct);
+    // } else if (leftShoulder) {
+    //   leftIntake.spin(forward, 100, velocityUnits::pct);
+    //   rightIntake.spin(reverse, 100, velocityUnits::pct);
+    // } else {
+    //   leftIntake.stop();
+    //   rightIntake.stop();
+    // }
 
-    bool leftShoulder = Controller1.ButtonL1.pressing(); // rename intakeLoad?
-    bool leftTrigger = Controller1.ButtonL2.pressing(); // rename intakeUnload?
-    if (leftTrigger) {
-      leftIntake.spin(reverse, 100, velocityUnits::pct);
-      rightIntake.spin(forward, 100, velocityUnits::pct);
-    } else if (leftShoulder) {
-      leftIntake.spin(forward, 100, velocityUnits::pct);
-      rightIntake.spin(reverse, 100, velocityUnits::pct);
-    } else {
-      leftIntake.stop();
-      rightIntake.stop();
-    }
-
-    bool rightShoulder = Controller1.ButtonR1.pressing(); // rename tiltForward?
-    bool rightTrigger = Controller1.ButtonR2.pressing();  // tileBackward?
-    if (rightTrigger) {
-      pushMotor.spin(reverse, 100, velocityUnits::pct);
-    } else if (rightShoulder) {
-      pushMotor.spin(forward, 100, velocityUnits::pct);
-    } else {
-      pushMotor.stop();
-    }
+    tower (Controller1.ButtonR1, Controller1.ButtonR2);
+    // bool rightShoulder = Controller1.ButtonR1.pressing(); // rename tiltForward?
+    // bool rightTrigger = Controller1.ButtonR2.pressing();  // tileBackward?
+    // if (rightTrigger) {
+    //   pushMotor.spin(reverse, 100, velocityUnits::pct);
+    // } else if (rightShoulder) {
+    //   pushMotor.spin(forward, 100, velocityUnits::pct);
+    // } else {
+    //   pushMotor.stop();
+    // }
 
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
