@@ -49,7 +49,7 @@ void rightTrack(vex::controller::axis stick) {
   }
 }
 
-void intake(vex::controller::button load, vex::controller::button unload) {
+void intake(vex::controller::button unload, vex::controller::button load) {
   if (load.pressing()) {
     leftIntake.spin(reverse, 100, velocityUnits::pct);
     rightIntake.spin(forward, 100, velocityUnits::pct);
@@ -64,9 +64,9 @@ void intake(vex::controller::button load, vex::controller::button unload) {
 
 void tower(vex::controller::button forwardButton, vex::controller::button backButton) {
   if (forwardButton.pressing()) {
-    pushMotor.spin(reverse, 100, velocityUnits::pct);
+    pushMotor.spin(forward, 30, velocityUnits::pct);
   } else if (backButton.pressing()) {
-    pushMotor.spin(forward, 100, velocityUnits::pct);
+    pushMotor.spin(reverse, 30, velocityUnits::pct);
   } else {
     pushMotor.stop();
   }

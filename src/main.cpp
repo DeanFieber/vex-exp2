@@ -58,10 +58,8 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
-  frontLeftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
-  backLeftMotor.spin(directionType::fwd, 100, velocityUnits::pct);
-  frontRightMotor.spin(directionType::rev, 100, velocityUnits::pct);
-  backRightMotor.spin(directionType::rev, 100, velocityUnits::pct);
+  leftIntake.spin(forward, 100, velocityUnits::pct);
+  rightIntake.spin(reverse, 100, velocityUnits::pct);  
 }
 
 /*---------------------------------------------------------------------------*/
